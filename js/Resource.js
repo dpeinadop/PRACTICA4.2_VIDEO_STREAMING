@@ -1,7 +1,7 @@
 "use strict";
 
 
-function Resource (duracion, link){
+function Resource (duracion, link, audios,subtitles){
 			
 	//La función se invoca con el operador new
 	if (!(this instanceof Resource)) 
@@ -60,8 +60,8 @@ function Resource (duracion, link){
 			var nextIndex = 0;		    
 			return {
 			   next: function(){
-				   return nextIndex < audios.length ?
-					   {value: audios[nextIndex++], done: false} :
+				   return nextIndex < _audios.length ?
+					   {value: _audios[nextIndex++], done: false} :
 					   {done: true};
 			   }
 			}
@@ -133,8 +133,8 @@ function Resource (duracion, link){
 			var nextIndex = 0;		    
 			return {
 			   next: function(){
-				   return nextIndex < subtitles.length ?
-					   {value: subtitles[nextIndex++], done: false} :
+				   return nextIndex < _subtitles.length ?
+					   {value: _subtitles[nextIndex++], done: false} :
 					   {done: true};
 			   }
 			}

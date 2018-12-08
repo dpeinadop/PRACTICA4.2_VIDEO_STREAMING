@@ -31,10 +31,6 @@ function Person (name, lastname1, born, lastname2, picture){
 		picture = picture.trim();
 		picture = picture.toLowerCase();
 	}
-		
-	
-
-
 	
 	//Definición de atributos privados del objeto
 	var _name = name;

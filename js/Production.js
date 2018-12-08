@@ -31,9 +31,9 @@
 		var _publicacion = publication;
 		var _synopsis = "";
 		var _image = "";
+		var _id; // creamos un id para vincularlo con las categorias, actores y directores
 
 		//Propiedades de acceso a los atributos privados
-		
 		Object.defineProperty(this, 'title', {
 			get:function(){
 				return _title;
@@ -84,7 +84,14 @@
 				_image = typeof value !== 'undefined' ? value : "";
 			}		
 		});
-
+		Object.defineProperty(this, 'id', {
+			get:function(){
+				return _id;
+			},
+			set:function(value){
+				_id = typeof value !== 'undefined' ? value : "";
+			}		
+		});
 	}
 	Production.prototype = {}; 
 	Production.prototype.constructor = Production;

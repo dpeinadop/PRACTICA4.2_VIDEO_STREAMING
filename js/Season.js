@@ -1,4 +1,4 @@
-function Season (title){
+function Season (title, episodes){
 		
 	//La función se invoca con el operador new
 	if (!(this instanceof Season)) 

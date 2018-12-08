@@ -26,30 +26,6 @@ function EmptyValueException(param) {
 EmptyValueException.prototype = new ParameterValidationException(); //Heredamos de ParameterValidationException
 EmptyValueException.prototype.constructor = EmptyValueException;
 
-//Excepción de valor inválido
-function InvalidValueException(param, value) {
-	this.name = "InvalidValueException";
-	this.message = "Error: The paramenter " + param + " has an invalid value. (" + param + ": " + value + ")";
-}
-InvalidValueException.prototype = new ParameterValidationException(); //Heredamos de ParameterValidationException
-InvalidValueException.prototype.constructor = InvalidValueException;
-
-//Excepción acceso inválido a constructor
-function InvalidAccessConstructorException() {
-	this.name = "InvalidAccessConstructorException";
-	this.message = "Constructor can’t be called as a function.";
-}
-InvalidAccessConstructorException.prototype = new BaseException(); 
-InvalidAccessConstructorException.prototype.constructor = InvalidAccessConstructorException;
-
-//Excepción acceso inválido a constructor
-function UninstantiatedObjectException(param) {
-	this.name = "UninstantiatedObjectException";
-	this.message = "You can't instantiate a " + param + " object";
-}
-UninstantiatedObjectException.prototype = new BaseException(); 
-UninstantiatedObjectException.prototype.constructor = UninstantiatedObjectException;
-
 /*
 Manejo de errores personalizados
 */
@@ -64,67 +40,40 @@ VideoSystemtException.prototype.constructor = VideoSystemtException;
 
 //Excepción personalizada para indicar que el constructos no puede ser llamado como una función.
 //Recibe como parámetro un valor
-function InvalidAccessConstructorException(value){
-	this.name ="UninstantiatedObjectException";
-	this.message = "Constructor can’t be called as a function!";
-
+//Excepción acceso inválido a constructor
+function UninstantiatedObjectException(param) {
+	this.name = "UninstantiatedObjectException";
+	this.message = "You can't instantiate a " + param + " object";
 }
-InvalidAccessConstructorException.prototype = new BaseException(); //Heredamos de BaseException
+UninstantiatedObjectException.prototype = new ParameterValidationException(); 
 UninstantiatedObjectException.prototype.constructor = UninstantiatedObjectException;
 
 
-
-
-//Excepción personalizada para indicar que el valor introducido no es un objeto Person.
-//Recibe como parámetro un valor
-function InvalidAccessConstructorException(value){
-	this.name ="InvalidAccessConstructorException";
-	this.message = "No es un Object!";
+//Excepción intento de instacia clase abstracta
+function AbstractClassException(classValue) {
+	this.name = "AbstractClassException";
+	this.message = classValue + " is a abstract class.";
 }
+AbstractClassException.prototype = new BaseException(); 
+AbstractClassException.prototype.constructor = AbstractClassException;
 
-InvalidAccessConstructorException.prototype = new BaseException(); //Heredamos de BaseException
+//Excepción acceso inválido a constructor
+function InvalidAccessConstructorException() {
+	this.name = "InvalidAccessConstructorException";
+	this.message = "Constructor can’t be called as a function.";
+}
+InvalidAccessConstructorException.prototype = new BaseException(); 
 InvalidAccessConstructorException.prototype.constructor = InvalidAccessConstructorException;
-
-
-//Excepción personalizada para indicar está llena.
-//Recibe como parámetro un valor
-function EmptyValueException(value){
-	this.name ="EmptyValueException";
-	this.message = "El campo está vacío!";
-}
-
-EmptyValueException.prototype = new BaseException(); //Heredamos de BaseException
-EmptyValueException.prototype.constructor = EmptyValueException;
-
-
-//Excepción personalizada para indicar se encuentra fuera de rango.
-//Recibe como parámetro un valor
-function OutLimitException(){
-	this.name ="OutLimitException";
-	this.message = "El índice está fuera de los límites de la lista!";
-}
-
-OutLimitException.prototype = new BaseException(); //Heredamos de BaseException
-OutLimitException.prototype.constructor = OutLimitException;
-
-//Excepción personalizada para indicar si está vacía.
-//Recibe como parámetro un valor
-function IsEmptyException(){
-	this.name ="IsEmptyException";
-	this.message = "La lista está vacía!";
-}
-
-IsEmptyException.prototype = new BaseException(); //Heredamos de BaseException
-IsEmptyException.prototype.constructor = IsEmptyException;
 
 
 // Excepciones individualizadas para los diferentes objetos
 function VideoSystemException() {
 	this.name = "VideoSystemException";
-	this.message = "Error: Image Manger Generic Exception.";
+	this.message = "Error: Video System Generic Exception.";
 }
 VideoSystemException.prototype = new BaseException(); //Heredamos de BaseException
 VideoSystemException.prototype.constructor = VideoSystemException;
+
 
 // excepciones para el objeto user
 function UserVideoSystemException() {
@@ -136,17 +85,18 @@ UserVideoSystemException.prototype.constructor = UserVideoSystemException;
 
 function UserExistsVideoSystemException() {
 	this.name = "UserExistsVideoSystemExceptio";
-	this.message = "Error: The user exists in the image manager.";
+	this.message = "Error: The user exists in the Video System.";
 }
 UserExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 UserExistsVideoSystemException.prototype.constructor = UserExistsVideoSystemException;
 
 function UserNotExistsVideoSystemException() {
 	this.name = "UserNotExistsVideoSystemException";
-	this.message = "Error: The user doesn't exist in the image manager.";
+	this.message = "Error: The user doesn't exist in the Video System.";
 }
 UserNotExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 UserNotExistsVideoSystemException.prototype.constructor = UserNotExistsVideoSystemException;
+
 
 // Excepciones para el objeto category
 function CategoryVideoSystemException() {
@@ -158,39 +108,18 @@ CategoryVideoSystemException.prototype.constructor = CategoryVideoSystemExceptio
 
 function CategoryExistsVideoSystemException() {
 	this.name = "CategoryExistsVideoSystemException";
-	this.message = "Error: The category exists in the image manager.";
+	this.message = "Error: The category exists in the Video System.";
 }
 CategoryExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 CategoryExistsVideoSystemException.prototype.constructor = CategoryExistsVideoSystemException;
 
 function CategoryNotExistsVideoSystemException() {
 	this.name = "CategoryNotExistsVideoSystemException";
-	this.message = "Error: The category doesn't exist in the image manager.";
+	this.message = "Error: The category doesn't exist in the Video System.";
 }
 CategoryNotExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 CategoryNotExistsVideoSystemException.prototype.constructor = CategoryNotExistsVideoSystemException;
 
-// Excepciones para el objeto productions
-function ProductionVideoSystemException() {
-	this.name = "ProductionVideoSystemException";
-	this.message = "Error: The method needs a Production parameter.";
-}
-ProductionVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
-ProductionVideoSystemException.prototype.constructor = ProductionVideoSystemException;
-
-function ProductionExistsVideoSystemException() {
-	this.name = "ProductionExistsVideoSystemException";
-	this.message = "Error: The production exists in the image manager.";
-}
-ProductionExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
-ProductionExistsVideoSystemException.prototype.constructor = ProductionExistsVideoSystemException;
-
-function ProducitionNotExistsVideoSystemException() {
-	this.name = "ProducitionNotExistsVideoSystemException";
-	this.message = "Error: The production doesn't exist in the image manager.";
-}
-ProducitionNotExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
-ProducitionNotExistsVideoSystemException.prototype.constructor = ProducitionNotExistsVideoSystemException;
 
 // Excepciones para el objeto productions
 function ProductionVideoSystemException() {
@@ -202,17 +131,18 @@ ProductionVideoSystemException.prototype.constructor = ProductionVideoSystemExce
 
 function ProductionExistsVideoSystemException() {
 	this.name = "ProductionExistsVideoSystemException";
-	this.message = "Error: The production exists in the image manager.";
+	this.message = "Error: The production exists in the Video System.";
 }
 ProductionExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 ProductionExistsVideoSystemException.prototype.constructor = ProductionExistsVideoSystemException;
 
 function ProducitionNotExistsVideoSystemException() {
 	this.name = "ProducitionNotExistsVideoSystemException";
-	this.message = "Error: The production doesn't exist in the image manager.";
+	this.message = "Error: The production doesn't exist in the Video System.";
 }
 ProducitionNotExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 ProducitionNotExistsVideoSystemException.prototype.constructor = ProducitionNotExistsVideoSystemException;
+
 
 
 // Excepciones para  actor
@@ -225,19 +155,20 @@ ProductionVideoSystemException.prototype.constructor = ProductionVideoSystemExce
 
 function ActorExistsVideoSystemException() {
 	this.name = "ActorExistsVideoSystemException";
-	this.message = "Error: The actor exists in the image manager.";
+	this.message = "Error: The actor exists in the Video System.";
 }
 ActorExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 ActorExistsVideoSystemException.prototype.constructor = ActorExistsVideoSystemException;
 
 function ActorNotExistsVideoSystemException() {
 	this.name = "ActorNotExistsVideoSystemException";
-	this.message = "Error: The production doesn't exist in the image manager.";
+	this.message = "Error: The actor doesn't exist in the Video System.";
 }
 ActorNotExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 ActorNotExistsVideoSystemException.prototype.constructor = ActorNotExistsVideoSystemException;
 
-// Excepciones para  dirctor
+
+// Excepciones para  director
 function DirectorVideoSystemException() {
 	this.name = "ActorVideoSystemException";
 	this.message = "Error: The method needs a Person parameter.";
@@ -247,14 +178,14 @@ DirectorVideoSystemException.prototype.constructor = DirectorVideoSystemExceptio
 
 function DirectorExistsVideoSystemException() {
 	this.name = "ActorExistsVideoSystemException";
-	this.message = "Error: The director exists in the image manager.";
+	this.message = "Error: The director exists in the Video System.";
 }
 ActorExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 ActorExistsVideoSystemException.prototype.constructor = ActorExistsVideoSystemException;
 
 function DirectorNotExistsVideoSystemException() {
 	this.name = "DirectorNotExistsVideoSystemException";
-	this.message = "Error: The production doesn't exist in the image manager.";
+	this.message = "Error: The director doesn't exist in the Video System.";
 }
 DirectorNotExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
 DirectorNotExistsVideoSystemException.prototype.constructor = DirectorNotExistsVideoSystemException;

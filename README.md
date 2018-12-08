@@ -12,6 +12,21 @@ Versión 1.0
 		- User.js
 		- VideoSystem.js
 		- Error.js
-		- test.je
+		- test.js
 	VideoStreaming.html
 	Readme.md
+
+	Versión 2.0
+	directorio js
+		- Category.js
+		- Coordinate.js
+		- Person.js -->mod
+		- Production.js -->mod
+		- Resource.js -->mod
+		- Season.js -->mod
+		- User.js 
+		- VideoSystem.js -->mod
+		- Error.js -->mod
+		- test.js -->mod
+	VideoStreaming.html
+	Readme.md -->mod
