@@ -1,110 +1,116 @@
 "use strict";
 
 // objeto Production es una clase abstracta
-(function(){ 
+(function () {
 	var abstractCreateLock = false; //Seguro para no instanciar Produccion ya que es abstracta
 
 	//Constructor de Produccion. Permite definir propiedades comunes para todos los objetos que lo heredan.
 	//Obligatorio serían title, publication.
-	function Production (title, publication){
+	function Production(title, publication, nationality, synopsis, image) {
 		//Validación clase abstracta
-		if(abstractCreateLock) 
-			throw new UninstantiatedObjectException("Production");		
+		if (abstractCreateLock)
+			throw new UninstantiatedObjectException("Production");
 		//La función se invoca con el operador new
-		if (!(this instanceof Production)) 
+		if (!(this instanceof Production))
 			throw new InvalidAccessConstructorException();
 
 		//Validación de parámetros obligatorios
-			
+
 		title = typeof title !== 'undefined' ? title : "";
 		if (title === "")
-			 throw new EmptyValueException("title");
+			throw new EmptyValueException("title");
 		if (!(publication instanceof Date))
-			 throw new EmptyValueException("publication");
-		
+			throw new EmptyValueException("publication");
+
 		title = title.trim();
 		title = title.toUpperCase();
+		if (nationality == ! "") {
+			nationality = nationality.trim();
+			nationality = nationality.toLowerCase();
+		}
 
 		//Definición de atributos privados del objeto
 		var _title = title;
-		var _nationality = "";
 		var _publicacion = publication;
-		var _synopsis = "";
-		var _image = "";
 		var _id; // creamos un id para vincularlo con las categorias, actores y directores
+		var _synopsis = synopsis;
+		var _image = image;
+		var _nationality = nationality;
+
+
 
 		//Propiedades de acceso a los atributos privados
 		Object.defineProperty(this, 'title', {
-			get:function(){
+			get: function () {
 				return _title;
 			},
-			set:function(value){
+			set: function (value) {
 				value = typeof value !== 'undefined' ? value : "";
-				if (value === "") 
+				if (value === "")
 					throw new EmptyValueException("title");
-					_title = value;
-			}		
+				_title = value;
+			}
 		});
 
 		Object.defineProperty(this, 'nationality', {
-			get:function(){
+			get: function () {
 				return _nationality;
 			},
-			set:function(value){
+			set: function (value) {
 				_nationality = typeof value !== 'undefined' ? value : 0;
-				
-			}		
+
+			}
 		});
 
 		Object.defineProperty(this, 'publicacion', {
-			get:function(){
+			get: function () {
 				return _publicacion;
 			},
-			set:function(value){
+			set: function (value) {
 				value = typeof value !== 'undefined' ? value : "";
-				if (value === "") 
+				if (value === "")
 					throw new EmptyValueException("publicacion");
-					_publicacion = value;
-			}		
+				_publicacion = value;
+			}
 		});
 
 		Object.defineProperty(this, 'synopsis', {
-			get:function(){
+			get: function () {
 				return _synopsis;
 			},
-			set:function(value){
+			set: function (value) {
 				_synopsis = typeof value !== 'undefined' ? value : "";
-			}		
+			}
 		});
 		Object.defineProperty(this, 'image', {
-			get:function(){
+			get: function () {
 				return _image;
 			},
-			set:function(value){
+			set: function (value) {
 				_image = typeof value !== 'undefined' ? value : "";
-			}		
+			}
 		});
 		Object.defineProperty(this, 'id', {
-			get:function(){
+			get: function () {
 				return _id;
 			},
-			set:function(value){
+			set: function (value) {
 				_id = typeof value !== 'undefined' ? value : "";
-			}		
+			}
 		});
 	}
-	Production.prototype = {}; 
+	Production.prototype = {};
 	Production.prototype.constructor = Production;
-	Production.prototype.toString = function(){
+	Production.prototype.toString = function () {
 		return "Title: " + this.title + " Nationality: " + this.nationality + " Publicacion: " + this.publicacion + "Synopsis: " + this.synopsis + "Image: " + this.image;
 	}
 
 	// Definimos la subclase Movie, no tiene ningún parámetro obligatorio
-	function Movie(title, publication){
+	function Movie(title, publication, resource, locations) {
 
 		//Llamada al superconstructor. Debemos desactivar el seguro para realizarla.
 		abstractCreateLock = false;
-		Production.call(this,title,publication);	
+		Production.call(this, title, publication);
 		abstractCreateLock = true;
 
 		//Atributos privados de Movie
@@ -113,40 +119,40 @@
 
 		//Propiedades de acceso a los atributos privados
 		Object.defineProperty(this, 'resource', {
-			get:function(){
+			get: function () {
 				return _resource;
 			},
-			set:function(value){
+			set: function (value) {
 				_resource = typeof value !== 'undefined' ? value : "";
-			}		
-		});		
+			}
+		});
 
 		Object.defineProperty(this, 'locations', {
-			get:function(){
-				var nextIndex = 0;		    
-					return {
-					   next: function(){
-						   return nextIndex < locations.length ?
-							   {value: locations[nextIndex++], done: false} :
-							   {done: true};
-				   }
+			get: function () {
+				var nextIndex = 0;
+				return {
+					next: function () {
+						return nextIndex < locations.length ?
+							{ value: locations[nextIndex++], done: false } :
+							{ done: true };
+					}
 				}
-			}	
-		});		
-			
+			}
+		});
+
 	}
 	Movie.prototype = Object.create(Production.prototype); //Definimos la herencia, por tanto debemos poder declarar un objeto BaseForm
 	Movie.prototype.constructor = Movie;
-	Movie.prototype.toString = function(){
+	Movie.prototype.toString = function () {
 		return Production.prototype.toString.call(this) + " Resource: " + this.resource + " Locations: " + this.localtions;
 	}
 
 	// Definimos la subclase Serie, no contiene parámetros obligatorios.
-	function Serie(title, publication){
+	function Serie(title, publication, seasons) {
 
 		//Llamada al superconstructor. Debemos desactivar el seguro para realizarla.
 		abstractCreateLock = false;
-		Production.call(this, title, publication);	
+		Production.call(this, title, publication);
 		abstractCreateLock = true;
 
 		//Atributos privados de Serie
@@ -154,29 +160,22 @@
 
 		//Propiedades de acceso a los atributos privados
 		Object.defineProperty(this, 'seasons', {
-			get:function(){
-				var nextIndex = 0;		    
+			get: function () {
+				var nextIndex = 0;
 				return {
-				   next: function(){
-					   return nextIndex < seasons.length ?
-						   {value: seasons[nextIndex++], done: false} :
-						   {done: true};
-				   }
+					next: function () {
+						return nextIndex < seasons.length ?
+							{ value: seasons[nextIndex++], done: false } :
+							{ done: true };
+					}
 				}
-			}	
-		});	
-		
-		//addSeasons: function(){}
-		//removeSeasons : function(){}
-	
-					
-			
-		
+			}
+		});
 	}
-		
+
 	Serie.prototype = Object.create(Production.prototype); //Definimos la herencia, por tanto debemos poder declarar un objeto BaseForm
 	Serie.prototype.constructor = Serie;
-	Serie.prototype.toString = function(){
+	Serie.prototype.toString = function () {
 		return Production.prototype.toString.call(this) + " Resource: " + this.resource + " Locations: " + this.localtions;
 	}
 
@@ -184,8 +183,8 @@
 	abstractCreateLock = true; //Activamos el seguro
 
 	//Devolvemos constructores
-	window.Production = Production; 
-	window.Movie = Movie; 
-	window.Serie = Serie; 
-	
+	window.Production = Production;
+	window.Movie = Movie;
+	window.Serie = Serie;
+
 })(); //Fin declaración clase abstracta Production y sus respectivas subclases

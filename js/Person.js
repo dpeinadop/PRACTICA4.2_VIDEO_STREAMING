@@ -38,7 +38,7 @@ function Person (name, lastname1, born, lastname2, picture){
 	var _lastname2 = lastname2;
 	var _born = born;
 	var _picture = picture;
-	
+	var _id; // creamos un id para vincularlo con las actores y directores
 
 	//Propiedades de acceso a los atributos privados
 	Object.defineProperty(this, 'name', {
@@ -97,6 +97,15 @@ function Person (name, lastname1, born, lastname2, picture){
 			
 		}		
 	});	
+
+	Object.defineProperty(this, 'id', {
+		get:function(){
+			return _id;
+		},
+		set:function(value){
+			_id = typeof value !== 'undefined' ? value : "";
+		}		
+	});
 	
 	
 }

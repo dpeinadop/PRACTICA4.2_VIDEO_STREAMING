@@ -68,60 +68,55 @@ function Resource (duracion, link, audios,subtitles){
 		}	
 	});	
 
-	//Añade un nuevo autor al gestor
+	//Añade un nuevo audio al Video en Streaming
 	this.addAudios= function(audios){
 		if (!(audios instanceof audios)) { 
-			throw new AudiosException ();
+			throw new VideoSystemException ();
 		}		
 		var position = getAudiosPosition(audios); 	
 		if (position === -1){
 			_audios.push(audios);
 		} else{
-			throw new AudiosException();
+			throw new VideoSystemException();
 		}	
 
 		return audios.length;
 	}
 
-	//Elimina un nuevo autor del gestor
-	this.removeAudios = function(audios){
+	//Elimina un nuevo audio del Video en Streaming
+		this.removeAudios = function(audios){
 		if (!(audios instanceof audios)) { 
-			throw new AudiosException ();
+			throw new VideoSystemException ();
 		}		
 		var position = getAudiosPosition(audios); 	
 		if (position !== -1){
 			if (audios.title !== _defaultAuthor.title){
 				_audios.splice(position, 1);
-			} else{
-				throw new DefaulAudiosException();
-			}															
-		} else{
-			throw new AudiosNotExistsException();
+			} 
+			throw new VideoSystemException();
 		}	
 		return _audios.length;
 	}
 
-	//Dado un autor, devuelve la posición de ese autor en el array de autores o -1 si no lo encontramos.
+	//Dado un audio, devuelve la posición de ese autor en el array de audios o -1 si no lo encontramos.
 	function getAudiosPosition(audios){
 		if (!(audios instanceof Audios)) { 
-			throw new AudiosException ();
+			throw new VideoSystemException ();
 		}		
-
 		function compareElements(element) {
 		  return (element.title === audios.title)
 		}
-		
 		return _audios.findIndex(compareElements);		
 	}
+
+	//Nos da la posición de un audio
 	function getAudiosPosition(audios){
 		if (!(audios instanceof Audios)) { 
-			throw new AudiosException ();
+			throw new VideoSystemException ();
 		}		
-
 		function compareElements(element) {
 		  return (element.title === audios.title)
 		}
-		
 		return _audios.findIndex(compareElements);		
 	};	
 
@@ -141,35 +136,31 @@ function Resource (duracion, link, audios,subtitles){
 		}	
 	});	
 
-	//Añade un nuevo autor al gestor
+	//Añade un subtitles audio al Video en Streaming
 	this.addSubtitles= function(subtitles){
 		if (!(audios instanceof subtitles)) { 
-			throw new SubtitlesException ();
+			throw new VideoSystemException ();
 		}		
 		var position = getSubtitlesPosition(subtitles); 	
 		if (position === -1){
 			_subtitles.push(subtitles);
 		} else{
-			throw new SubtitlesException();
+			throw new VideoSystemException();
 		}	
 
 		return subtitles.length;
 	}
 
-	//Elimina un nuevo autor del gestor
+	//Elimina un subtitles del Video en Streaming
 	this.removeSubtitles= function(subtitles){
 		if (!(audios instanceof audios)) { 
-			throw new AudiosException ();
+			throw new VideoSystemException ();
 		}		
 		var position = getSubtitlesPosition(subtitles); 	
 		if (position !== -1){
 			if (subtitles.title !== _defaultSubtitles.title){
 				_subtitles.splice(position, 1);
-			} else{
-				throw new DefaulSubtitlesException();
-			}															
-		} else{
-			throw new SubtitlesNotExistsException();
+			}
 		}	
 		return _subtitles.length;
 	}
@@ -177,15 +168,14 @@ function Resource (duracion, link, audios,subtitles){
 	//Dado un autor, devuelve la posición de ese autor en el array de autores o -1 si no lo encontramos.
 	function getSubtitlesPosition(subtitles){
 		if (!(subtitles instanceof Subtitles)) { 
-			throw new SubtitlesException ();
+			throw new VideoSystemException ();
 		}		
-
 		function compareElements(element) {
 		  return (element.title === subtitles.title)
 		}
-		
 		return _subtitles.findIndex(compareElements);		
 	}
+	//Nos da la posición de un audio
 	function getSubtitlesPosition(subtitles){
 		if (!(subtitles instanceof Subtitles)) { 
 			throw new SubtitlesException ();

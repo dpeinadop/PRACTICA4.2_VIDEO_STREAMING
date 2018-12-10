@@ -5,7 +5,7 @@ function BaseException() {
 BaseException.prototype = new Error(); //Herencia del objeto Error.
 BaseException.prototype.constructor = BaseException; //Definimos el constructor
 //Sobrescribimos el método toString para personalizarlos
-BaseException.prototype.toString = function(){
+BaseException.prototype.toString = function () {
 	// note that name and message are properties of Error
 	return this.name + ": " + this.message;
 };
@@ -45,7 +45,7 @@ function UninstantiatedObjectException(param) {
 	this.name = "UninstantiatedObjectException";
 	this.message = "You can't instantiate a " + param + " object";
 }
-UninstantiatedObjectException.prototype = new ParameterValidationException(); 
+UninstantiatedObjectException.prototype = new ParameterValidationException();
 UninstantiatedObjectException.prototype.constructor = UninstantiatedObjectException;
 
 
@@ -54,7 +54,7 @@ function AbstractClassException(classValue) {
 	this.name = "AbstractClassException";
 	this.message = classValue + " is a abstract class.";
 }
-AbstractClassException.prototype = new BaseException(); 
+AbstractClassException.prototype = new BaseException();
 AbstractClassException.prototype.constructor = AbstractClassException;
 
 //Excepción acceso inválido a constructor
@@ -62,7 +62,7 @@ function InvalidAccessConstructorException() {
 	this.name = "InvalidAccessConstructorException";
 	this.message = "Constructor can’t be called as a function.";
 }
-InvalidAccessConstructorException.prototype = new BaseException(); 
+InvalidAccessConstructorException.prototype = new BaseException();
 InvalidAccessConstructorException.prototype.constructor = InvalidAccessConstructorException;
 
 
@@ -169,23 +169,23 @@ ActorNotExistsVideoSystemException.prototype.constructor = ActorNotExistsVideoSy
 
 
 // Excepciones para  director
-function DirectorVideoSystemException() {
-	this.name = "ActorVideoSystemException";
+function DirectoVideoSystemException() {
+	this.name = "DirectoVideoSystemException";
 	this.message = "Error: The method needs a Person parameter.";
 }
-DirectorVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
-DirectorVideoSystemException.prototype.constructor = DirectorVideoSystemException;
+DirectoVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
+DirectoVideoSystemException.prototype.constructor = DirectoVideoSystemException;
 
-function DirectorExistsVideoSystemException() {
-	this.name = "ActorExistsVideoSystemException";
+function DirectoExistsVideoSystemException() {
+	this.name = "DirectoExistsVideoSystemException";
 	this.message = "Error: The director exists in the Video System.";
 }
-ActorExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
-ActorExistsVideoSystemException.prototype.constructor = ActorExistsVideoSystemException;
+DirectoExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
+DirectoExistsVideoSystemException.prototype.constructor = DirectoExistsVideoSystemException;
 
-function DirectorNotExistsVideoSystemException() {
-	this.name = "DirectorNotExistsVideoSystemException";
+function DirectoNotExistsVideoSystemException() {
+	this.name = "DirectoNotExistsVideoSystemException";
 	this.message = "Error: The director doesn't exist in the Video System.";
 }
-DirectorNotExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
-DirectorNotExistsVideoSystemException.prototype.constructor = DirectorNotExistsVideoSystemException;
+DirectoNotExistsVideoSystemException.prototype = new VideoSystemException(); //Heredamos de VideoSystemException
+DirectoNotExistsVideoSystemException.prototype.constructor = DirectoNotExistsVideoSystemException;

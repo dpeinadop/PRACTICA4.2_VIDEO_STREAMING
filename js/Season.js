@@ -47,7 +47,7 @@ function Season (title, episodes){
 			throw new EmptyValueException("title");
 		if (!Array.isArray(episode))
 			throw new EmptyValueException("");
-		if (!Array.isArray(episode))
+		if (!Array.isArray(scenaries))
 			throw new EmptyValueException("");
 		
 		_episodes.push({"title": title,"episode": episode,"scenarios": scenaries});
@@ -60,5 +60,5 @@ Season.prototype.constructor = Season;
 
 
 Season.prototype.toString = function(){
-	return "Title: " + this.title +  " Episodes: " + this.episodes;
+	return "Title: " + this.title +  " Episodes: " + this.episodes +  " Escenarios: " + this.scenaries;
 }

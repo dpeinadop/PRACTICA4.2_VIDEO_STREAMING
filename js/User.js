@@ -2,28 +2,28 @@
 
 
 function User(username, email, password) {
-	
+
 	//La función se invoca con el operador new
 	if (!(this instanceof User))
 		throw new InvalidAccessConstructorException();
 
 	//Validación de parámetros obligatorios
 	username = typeof username !== 'username' ? username : "";
-	if (username === "") 
+	if (username === "")
 		throw new EmptyValueException("username");
 	email = typeof email !== 'email' ? email : "";
 	if (email === 'undefined' || email === '')
-		 throw new EmptyValueException("email");	
-	if (/^[a-zA-Z][a-zA-Z0-9_\-]*(\.[a-zA-Z0-9_\-]*)*[a-zA-Z0-9]\@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test (email) !== true)
-			throw new InvalidValueException("email", email);
+		throw new EmptyValueException("email");
+	if (/^[a-zA-Z][a-zA-Z0-9_\-]*(\.[a-zA-Z0-9_\-]*)*[a-zA-Z0-9]\@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(email) !== true)
+		throw new InvalidValueException("email", email);
 	password = typeof password !== 'undefined' ? password : "";
-	if (password === 0) 
+	if (password === 0)
 		throw new EmptyValueException("password");
 
 	username = username.trim();
 	email = email.trim();
 	password = password.trim();
-	
+
 
 	//Definición de atributos privados del objeto
 	var _username = username;
@@ -44,15 +44,15 @@ function User(username, email, password) {
 	});
 
 	Object.defineProperty(this, 'email', {
-		get:function(){
+		get: function () {
 			return _email;
 		},
-		set:function(value){
-			if (value === 'undefined' || value === '') throw new EmptyValueException("email");	
-			if (/^[a-z][a-z0-9_\-]*(\.[a-z0-9_\-]*)*[a-z0-9]\@[a-z0-9]+\.[a-z]{2,3}$/.test (value) !== true)
-				throw new InvalidValueException("email", value);		
+		set: function (value) {
+			if (value === 'undefined' || value === '') throw new EmptyValueException("email");
+			if (/^[a-z][a-z0-9_\-]*(\.[a-z0-9_\-]*)*[a-z0-9]\@[a-z0-9]+\.[a-z]{2,3}$/.test(value) !== true)
+				throw new InvalidValueException("email", value);
 			_email = value;
-		}		
+		}
 	});
 
 	Object.defineProperty(this, 'password', {
